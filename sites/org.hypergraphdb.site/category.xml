@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="HyperGraphDB Update Site" url="http://agentlab.ru/eclipse/update/org.hypergraphdb">
+      HyperGraphDB Update Site
+   </description>
+   <feature url="features/org.hypergraphdb.feature_1.4.0.qualifier.jar" id="org.hypergraphdb.feature" version="1.4.0.qualifier"/>
+   <feature url="features/org.hypergraphdb.feature.source_1.4.0.qualifier.jar" id="org.hypergraphdb.feature.source" version="1.4.0.qualifier"/>
+</site>

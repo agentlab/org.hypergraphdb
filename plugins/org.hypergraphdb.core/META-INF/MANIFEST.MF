@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Private-Package: org.hypergraphdb.atom.impl
+Bundle-Name: HyperGraphDB Core
+Bundle-SymbolicName: org.hypergraphdb.core;singleton:=true
+Bundle-Version: 1.4.0.qualifier
+Bundle-ManifestVersion: 2
+Import-Package: javax.management
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.hypergraphdb,
+ org.hypergraphdb.algorithms,
+ org.hypergraphdb.annotation,
+ org.hypergraphdb.atom,
+ org.hypergraphdb.atom.impl,
+ org.hypergraphdb.cache,
+ org.hypergraphdb.event,
+ org.hypergraphdb.handle,
+ org.hypergraphdb.indexing,
+ org.hypergraphdb.maintenance,
+ org.hypergraphdb.query,
+ org.hypergraphdb.query.cond2qry,
+ org.hypergraphdb.query.impl,
+ org.hypergraphdb.storage,
+ org.hypergraphdb.transaction,
+ org.hypergraphdb.type,
+ org.hypergraphdb.type.javaprimitive,
+ org.hypergraphdb.util
+Bundle-Vendor: AgentLab

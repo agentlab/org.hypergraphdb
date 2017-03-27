@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: HyperGraphDB Test
+Bundle-SymbolicName: org.hypergraphdb.test
+Bundle-Version: 1.4.0.qualifier
+Bundle-Vendor: AgentLab
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.hypergraphdb.core;bundle-version="1.4.0",
+ org.junit;bundle-version="4.0.0"
+Export-Package: hgtest,
+ hgtest.beans,
+ hgtest.verify
