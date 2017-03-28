@@ -16,7 +16,7 @@ import static org.hypergraphdb.peer.Messages.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGSearchResult;

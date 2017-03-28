@@ -14,9 +14,9 @@
 	</parent>
 
 	<modules>
-		<module>org.hypergraphdb.test</module>
+		<!--<module>org.hypergraphdb.test</module>
 		<module>org.hypergraphdb.storage.hgbdbje.tests</module>
-		<module>org.hypergraphdb.p2p.tests</module>
+		<module>org.hypergraphdb.p2p.tests</module>-->
 	</modules>
 
 	<build>

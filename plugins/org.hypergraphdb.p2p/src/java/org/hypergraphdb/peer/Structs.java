@@ -1,9 +1,9 @@
-/* 
- * This file is part of the HyperGraphDB source distribution. This is copyrighted 
- * software. For permitted uses, licensing options and redistribution, please see  
- * the LicensingInformation file at the root level of the distribution.  
- * 
- * Copyright (c) 2005-2010 Kobrix Software, Inc.  All rights reserved. 
+/*
+ * This file is part of the HyperGraphDB source distribution. This is copyrighted
+ * software. For permitted uses, licensing options and redistribution, please see
+ * the LicensingInformation file at the root level of the distribution.
+ *
+ * Copyright (c) 2005-2010 Kobrix Software, Inc.  All rights reserved.
  */
 package org.hypergraphdb.peer;
 
@@ -18,15 +18,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import java.util.Map.Entry;
-
-//import net.jxta.document.AdvertisementFactory;
-//import net.jxta.id.IDFactory;
-//import net.jxta.protocol.PipeAdvertisement;
-
-import mjson.Json;
+import java.util.Set;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGPersistentHandle;
@@ -71,17 +64,23 @@ import org.hypergraphdb.type.BonesOfBeans;
 import org.hypergraphdb.util.HGUtils;
 import org.hypergraphdb.util.Pair;
 
+//import net.jxta.document.AdvertisementFactory;
+//import net.jxta.id.IDFactory;
+//import net.jxta.protocol.PipeAdvertisement;
+
+import org.mjson.Json;
+
 /**
- * 
+ *
  * <p>
  * Utility methods to be used in constructing nested structures for complex
  * message representations. This class consists entirely of static methods and
  * is designed to be imported with
  * <code>import org.hypergraphdb.peer.Structs.*</code>.
  * </p>
- * 
+ *
  * @author Borislav Iordanov
- * 
+ *
  */
 @SuppressWarnings("unchecked")
 public class Structs
@@ -119,7 +118,7 @@ public class Structs
      * arguments where each argument at an even position must be a name with the
      * argument following it its value.
      * </p>
-     * 
+     *
      * <p>
      * For example:
      * <code>struct("personName", "Adriano Celentano", "age", 245)</code>.
@@ -128,17 +127,23 @@ public class Structs
     private static Map<String, Object> struct(Object... args)
     {
         if (args == null)
+        {
             return null;
-        Map<String, Object> m = new HashMap<String, Object>();
+        }
+        Map<String, Object> m = new HashMap<>();
         if (args.length % 2 != 0)
+        {
             throw new IllegalArgumentException(
                     "The arguments array to struct must be of even size: a flattened list of name/value pairs");
+        }
         for (int i = 0; i < args.length; i += 2)
         {
             if (!(args[i] instanceof String))
+            {
                 throw new IllegalArgumentException(
                         "An argument at the even position " + i
                                 + " is not a string.");
+            }
             m.put((String) args[i], svalue(args[i + 1], false, true, null));
         }
         return m;
@@ -162,7 +167,7 @@ public class Structs
 
     /**
      * Creates an object that will be serialized via the custom mechanism.
-     * 
+     *
      * @param value
      * @return
      */
@@ -199,21 +204,25 @@ public class Structs
         // HGQueryCondition/HGAtomPredicate should be rendered
         if ((!skipSpecialClasses)
                 && (x instanceof HGQueryCondition || x instanceof HGAtomPredicate))
+        {
             return hgQueryOrPredicate(x);
+        }
         else if (x instanceof Performative)
+        {
             return x.toString();
-//        else if (x instanceof byte[])
-//            return new CustomSerializedValue(x);
-//        else if (x instanceof CustomSerializedValue)
-//            return x;
+        }
         else if (x == null || x instanceof Boolean || x instanceof String)
+        {
             return x;
+        }
         else if (x instanceof Map)
         {
-            HashMap<Object, Object> m  = new HashMap<Object, Object>();
+            HashMap<Object, Object> m  = new HashMap<>();
             Map<Object, Object> M = (Map)x;
             for (Map.Entry<Object, Object> e : M.entrySet())
+            {
                 m.put(svalue(e.getKey()), svalue(e.getValue()));
+            }
             return m;
         }
 //        else if (x instanceof Number)
@@ -269,7 +278,7 @@ public class Structs
 //        }
         else if (x.getClass().isArray())
         {
-            ArrayList<Object> l = new ArrayList<Object>();
+            ArrayList<Object> l = new ArrayList<>();
             for (int i = 0; i < Array.getLength(x); i++)
             {
                 l.add(svalue(Array.get(x, i), false, addClassName, null));
@@ -277,12 +286,16 @@ public class Structs
             return l;
         }
         else if (x instanceof Enum)
+        {
             return x.toString();
+        }
         else if (x instanceof Class)
+        {
             return ((Class<?>) x).getName();
+        }
         else if (x instanceof List)
         {
-            ArrayList<Object> l = new ArrayList<Object>();
+            ArrayList<Object> l = new ArrayList<>();
             for (Object i : (List<?>) x)
             {
                 l.add(svalue(i, false, addClassName, null));
@@ -291,7 +304,7 @@ public class Structs
         }
         else if (x instanceof Collection)
         {
-            ArrayList<Object> l = new ArrayList<Object>();
+            ArrayList<Object> l = new ArrayList<>();
             for (Object i : (Collection<?>) x)
             {
                 l.add(svalue(i, false, addClassName, null));
@@ -313,53 +326,83 @@ public class Structs
     private static String getNumberType(Class<?> numberClass)
     {
         if (numberClass.equals(int.class) || numberClass.equals(Integer.class))
+        {
             return "int";
+        }
         else if (numberClass.equals(short.class)
                 || numberClass.equals(Short.class))
+        {
             return "short";
+        }
         else if (numberClass.equals(byte.class)
                 || numberClass.equals(Byte.class))
+        {
             return "byte";
+        }
         else if (numberClass.equals(long.class)
                 || numberClass.equals(Long.class))
+        {
             return "long";
+        }
         else if (numberClass.equals(float.class)
                 || numberClass.equals(Float.class))
+        {
             return "float";
+        }
         else if (numberClass.equals(double.class)
                 || numberClass.equals(Double.class))
+        {
             return "double";
+        }
         return null;
     }
 
     private static Number getNumber(List<?> list)
     {
         if (list.size() < 3 || !(list.get(2) instanceof Number))
+        {
             return null;
+        }
 
         String typeName = list.get(1).toString();
         Number n = (Number) list.get(2);
         if ("int".equals(typeName))
+        {
             return n.intValue();
+        }
         else if ("short".equals(typeName))
+        {
             return n.shortValue();
+        }
         else if ("byte".equals(typeName))
+        {
             return n.byteValue();
+        }
         else if ("long".equals(typeName))
+        {
             return n.longValue();
+        }
         else if ("float".equals(typeName))
+        {
             return n.floatValue();
+        }
         else if ("double".equals(typeName))
+        {
             return n.doubleValue();
+        }
         else
+        {
             return null;
+        }
     }
 
     private static Map<String, Object> struct(Object bean, boolean addClassName)
     {
         if (bean == null)
+        {
             return null;
-        Map<String, Object> m = new HashMap<String, Object>();
+        }
+        Map<String, Object> m = new HashMap<>();
         for (PropertyDescriptor desc : BonesOfBeans.getAllPropertyDescriptors(bean.getClass())
                 .values())
         {
@@ -378,10 +421,10 @@ public class Structs
 
     // private static TwoWayMap<Class<?>, String> hgClassNames = new
     // TwoWayMap<Class<?>, String>();
-    private static Map<Class<?>, String> hgClassNames = new HashMap<Class<?>, String>();
-    private static Map<String, Class<?>> hgInvertedClassNames = new HashMap<String, Class<?>>();
-    private static Map<Class<?>, Pair<StructsMapper, String>> hgMappers = new HashMap<Class<?>, Pair<StructsMapper, String>>();
-    private static Map<String, StructsMapper> hgInvertedMappers = new HashMap<String, StructsMapper>();
+    private static Map<Class<?>, String> hgClassNames = new HashMap<>();
+    private static Map<String, Class<?>> hgInvertedClassNames = new HashMap<>();
+    private static Map<Class<?>, Pair<StructsMapper, String>> hgMappers = new HashMap<>();
+    private static Map<String, StructsMapper> hgInvertedMappers = new HashMap<>();
 
     static
     {
@@ -462,11 +505,13 @@ public class Structs
                   new BeanMapper(new String[] { "time" }),
                   "java-date");
         addMapper(java.sql.Timestamp.class, new StructsMapper() {
+            @Override
             public Object getObject(Object struct)
             {
                 return new java.sql.Timestamp(Long.parseLong(struct.toString()));
             }
 
+            @Override
             public Object getStruct(Object value)
             {
                 return Long.toString(((java.sql.Timestamp) value).getTime());
@@ -485,7 +530,7 @@ public class Structs
     /**
      * Adds a StructsMapper for a specific class. Mappers are capable of
      * creating a struct from an object of the given class.
-     * 
+     *
      * @param clazz
      * @param mapper
      * @param name
@@ -493,7 +538,7 @@ public class Structs
     private static synchronized void addMapper(Class<?> clazz,
                                               StructsMapper mapper, String name)
     {
-        hgMappers.put(clazz, new Pair<StructsMapper, String>(mapper, name));
+        hgMappers.put(clazz, new Pair<>(mapper, name));
         hgInvertedMappers.put(name, mapper);
     }
 
@@ -507,9 +552,13 @@ public class Structs
     {
         Object result = getPart(value, args);
         if (result instanceof HGQueryCondition)
+        {
             return (HGQueryCondition) result;
+        }
         else
+        {
             return null;
+        }
     }
 
     private static HGAtomPredicate getHGAtomPredicate(Object value,
@@ -517,9 +566,13 @@ public class Structs
     {
         Object result = getPart(value, args);
         if (result instanceof HGAtomPredicate)
+        {
             return (HGAtomPredicate) result;
+        }
         else
+        {
             return null;
+        }
     }
 
     /**
@@ -527,7 +580,7 @@ public class Structs
      * given as a sequence of objects (int for lists, strings for maps). If at
      * the end of the path we have a representation of a bean we recreate the
      * bean, if not we just return the object.
-     * 
+     *
      * @param source
      * @param args
      * @return
@@ -535,17 +588,25 @@ public class Structs
     private static <T> T getPart(Object source, Object... args)
     {
         if (args == null)
+        {
             return null;
+        }
 
         if (args.length == 0)
+        {
             return (T) createObject(source);
+        }
         if (args.length == 1)
+        {
             return (T) getStructPart(source, args[0]);
+        }
         else
         {
-            List<Object> l = new ArrayList<Object>();
+            List<Object> l = new ArrayList<>();
             for (Object x : args)
+            {
                 l.add(x);
+            }
 
             return (T) getStructPart(source, l, 0);
         }
@@ -559,17 +620,25 @@ public class Structs
     private static boolean hasPart(Object source, Object... args)
     {
         if ((args == null) || (source == null))
+        {
             return false;
+        }
 
         if (args.length == 0)
+        {
             return true;
+        }
         if (args.length == 1)
+        {
             return hasStructPart(source, args[0]);
+        }
         else
         {
-            List<Object> l = new ArrayList<Object>();
+            List<Object> l = new ArrayList<>();
             for (Object x : args)
+            {
                 l.add(x);
+            }
 
             return hasStructPart(source, l, 0);
         }
@@ -579,9 +648,13 @@ public class Structs
                                    Object... args)
     {
         if (source == null)
+        {
             return defaultValue;
+        }
         if (hasPart(source, args))
+        {
             defaultValue = (T) getPart(source, args);
+        }
         return defaultValue;
     }
 
@@ -595,20 +668,28 @@ public class Structs
         {
             List<Object> list = (List<Object>) path;
             if ((list.size() < pos) || (pos < 0))
+            {
                 return false;
+            }
 
             boolean hasPart = hasStructPart(source, list.get(pos));
             if (hasPart)
             {
                 if (pos == list.size())
+                {
                     return true;
+                }
                 else
+                {
                     return hasStructPart(getStructPart(source, list.get(pos)),
                                          path,
                                          pos + 1);
+                }
             }
             else
+            {
                 return false;
+            }
         }
     }
 
@@ -622,15 +703,21 @@ public class Structs
         {
             List<Object> list = (List<Object>) path;
             if ((list.size() < pos) || (pos < 0))
+            {
                 return null;
+            }
 
             Object part = getStructPart(source, list.get(pos));
             pos++;
 
             if (pos == list.size())
+            {
                 return createObject(part);
+            }
             else
+            {
                 return getStructPart(part, path, pos);
+            }
         }
     }
 
@@ -646,7 +733,9 @@ public class Structs
             return (listPos >= 0) && (listPos < ((List) source).size());
         }
         else
+        {
             return false;
+        }
     }
 
     private static Object getStructPart(Object source, Object position)
@@ -660,27 +749,31 @@ public class Structs
             return createObject(((List) source).get((Integer) position));
         }
         else
+        {
             return createObject(source);
+        }
     }
 
     /**
      * Tries to create an object from a source. Assumes source is a
      * CustomSerializedValue or a list of two elements first being the type name
      * and the second the content of the object.
-     * 
+     *
      * @param source
      * @return
      */
     private static Object createObject(Object source)
     {
         if (source == null)
+        {
             return null;
+        }
 
 //        if (source instanceof CustomSerializedValue)
 //        {
 //            return ((CustomSerializedValue) source).get();
 //        }
-        //else 
+        //else
         	if (source instanceof List)
         {
             List<Object> data = (List<Object>) source;
@@ -699,20 +792,26 @@ public class Structs
                 {
                     Number num = getNumber(data);
                     if (num != null)
+                    {
                         return num;
+                    }
                     else
                     {
                         Class<?> clazz = getBeanClass(className);
                         if (clazz == null)
+                        {
                             return source;
+                        }
                         else
+                        {
                             return createObject(data, clazz);
+                        }
                     }
                 }
             }
             else
             {
-                List<Object> result = new ArrayList<Object>();
+                List<Object> result = new ArrayList<>();
                 for (Object o : data)
                 {
                     result.add(createObject(o));
@@ -722,13 +821,17 @@ public class Structs
         }
         else if (source instanceof Map)
         {
-            HashMap<Object, Object> result = new HashMap<Object, Object>();
+            HashMap<Object, Object> result = new HashMap<>();
             for (Map.Entry<Object, Object> e : ((Map<Object, Object>)source).entrySet())
+            {
                 result.put(createObject(e.getKey()), createObject(e.getValue()));
+            }
             return result;
         }
         else
+        {
             return source;
+        }
     }
 
     private static Class<?> getBeanClass(String className)
@@ -738,7 +841,9 @@ public class Structs
 
         result = hgInvertedClassNames.get(className);
         if (result == null)
+        {
             result = loadClass(className);
+        }
         return result;
     }
 
@@ -792,16 +897,24 @@ public class Structs
 
             Object value = createObject(entry.getValue());
             if (value instanceof Long)
+            {
                 value = getValueForProperty(propertyClass, (Long) value);
+            }
             else if ((value instanceof ArrayList)
                     && (!propertyClass.isAssignableFrom(value.getClass())))
+            {
                 value = getValueForProperty(propertyClass, (ArrayList) value);
+            }
             else if (propertyClass.isEnum())
+            {
                 value = Enum.valueOf(propertyClass, value.toString());
+            }
             else if (propertyClass.equals(Class.class))
             {
                 if (value != null)
+                {
                     value = loadClass(value.toString());
+                }
             }
             BonesOfBeans.setProperty(bean, entry.getKey(), value);
         }
@@ -809,7 +922,7 @@ public class Structs
 
     /**
      * Casts the value of the second parameter to the type of the property.
-     * 
+     *
      * @param propertyClass
      * @param number
      * @return
@@ -843,7 +956,7 @@ public class Structs
 
     /**
      * Casts the value of the second parameter to the type of the property.
-     * 
+     *
      * @param propertyClass
      * @param list
      * @return
@@ -865,12 +978,16 @@ public class Structs
         else if (Collection.class.isAssignableFrom(propertyClass))
         {
             if (propertyClass.isAssignableFrom(List.class))
+            {
                 return list;
+            }
             else if (propertyClass.isAssignableFrom(Set.class))
             {
                 HashSet set = new HashSet();
                 for (Object x : list)
+                {
                     set.add(createObject(x));
+                }
                 return set;
             }
             else
@@ -881,7 +998,9 @@ public class Structs
                 {
                     col = (Collection) propertyClass.newInstance();
                     for (Object x : list)
+                    {
                         col.add(createObject(x));
+                    }
                 }
                 catch (InstantiationException e)
                 {
@@ -906,13 +1025,17 @@ public class Structs
     private static List<Object> hgQueryOrPredicate(Object x)
     {
         if (x == null)
+        {
             return null;
+        }
         String name = getClassName(x.getClass());
 
         if (name == null)
+        {
             throw new IllegalArgumentException(
                     "Unknown HyperGraph query condition or atom predicate type '"
                             + x.getClass().getName() + "'");
+        }
 
         // return list(name, svalue(x, true, true));
         return (List<Object>) svalue(x, true, true, null);
@@ -931,21 +1054,29 @@ public class Structs
     private static Map<String, Object> merge(Map<String, Object> m1,
                                             Map<String, Object> m2)
     {
-        Map<String, Object> m = new HashMap<String, Object>();
+        Map<String, Object> m = new HashMap<>();
         if (m1 != null)
+        {
             m.putAll(m1);
+        }
         if (m2 != null)
+        {
             m.putAll(m2);
+        }
         return m;
     }
 
     private List<Object> append(List<Object> l1, List<Object> l2)
     {
-        List<Object> l = new ArrayList<Object>();
+        List<Object> l = new ArrayList<>();
         if (l1 != null)
+        {
             l.addAll(l1);
+        }
         if (l2 != null)
+        {
             l.addAll(l2);
+        }
         return l;
     }
 
@@ -961,7 +1092,7 @@ public class Structs
      * arguments are both maps or both lists, all entries from the second are
      * stored in the first. Otherwise, nothing is done.
      * </p>
-     * 
+     *
      * @param o1
      *            The target of the merge.
      * @param o2
@@ -994,7 +1125,7 @@ public class Structs
     /**
      * @author ciprian.costa Implementors provide functions to create a struct
      *         from an object and an object from a struct.
-     * 
+     *
      */
     private static interface StructsMapper
     {
@@ -1008,14 +1139,14 @@ public class Structs
      * Object getObject(Object struct) { ArrayList<Object> data =
      * (ArrayList<Object>)struct; return new UUID((Long)data.get(0),
      * (Long)data.get(1)); }
-     * 
+     *
      * public Object getStruct(Object value) { Subgraph sg = (Subgraph)value;
      * return list(uuid.getMostSignificantBits(),
      * uuid.getLeastSignificantBits()); } }
      */
     /**
      * @author ciprian.costa
-     * 
+     *
      *         Mapper for UUID
      */
 //    public static class UUIDStructsMapper implements StructsMapper
@@ -1036,6 +1167,7 @@ public class Structs
 
     private static class HandleMapper implements StructsMapper
     {
+        @Override
         public Object getObject(Object struct)
         {
             return UUIDPersistentHandle.makeHandle(struct.toString()); // TODO:
@@ -1044,46 +1176,53 @@ public class Structs
                                                                        // handling
         }
 
+        @Override
         public Object getStruct(Object value)
         {
             if (value instanceof HGPersistentHandle)
+            {
                 return value.toString();
+            }
             else if (value instanceof HGLiveHandle)
+            {
                 return ((HGLiveHandle) value).getPersistent().toString();
+            }
             else
+            {
                 throw new RuntimeException(
                         "Attempt to serialize something that is not a HG handle as a HG handle.");
+            }
         }
     }
 
     /**
      * @author ciprian.costa
-     * 
+     *
      *         Mapper for pipe advertisements.
      */
     /*
      * public static class PipeAdvStructsMapper implements StructsMapper {
      * public Object getObject(Object struct) {
-     * 
+     *
      * PipeAdvertisement adv =
      * (PipeAdvertisement)AdvertisementFactory.newAdvertisement
      * (PipeAdvertisement.getAdvertisementType());
-     * 
+     *
      * Object x = getPart(struct, "type"); // variable needed because of Java 5
      * compiler bug adv.setType(x.toString()); x = getPart(struct, "name");
      * adv.setName(x.toString()); try { x = getPart(struct, "id");
      * adv.setPipeID(IDFactory.fromURI(URI.create(x.toString()))); } catch
      * (URISyntaxException e) { // TODO Auto-generated catch block
      * e.printStackTrace(); }
-     * 
+     *
      * return adv; }
-     * 
+     *
      * public Object getStruct(Object value) { PipeAdvertisement adv =
      * (PipeAdvertisement)value;
-     * 
+     *
      * return struct("type", adv.getType(), "id", adv.getPipeID().toString(),
      * "name", adv.getName()); }
-     * 
+     *
      * }
      */
 
@@ -1101,6 +1240,7 @@ public class Structs
             this.props = props;
         }
 
+        @Override
         public Object getObject(Object struct)
         {
             List<Object> L = (List<Object>) struct;
@@ -1120,14 +1260,16 @@ public class Structs
             return null; // unreachable
         }
 
+        @Override
         public Object getStruct(Object value)
         {
-            List<Object> L = new ArrayList<Object>();
+            List<Object> L = new ArrayList<>();
             L.add(value.getClass().getName());
-            Map<String, Object> m = new HashMap<String, Object>();
+            Map<String, Object> m = new HashMap<>();
             try
             {
                 if (props != null)
+                {
                     for (String propname : props)
                     {
                         PropertyDescriptor desc = BonesOfBeans.getPropertyDescriptor(value,
@@ -1138,9 +1280,12 @@ public class Structs
                                           desc.getPropertyType());
                         m.put(propname, x);
                     }
+                }
                 else
+                {
                     for (PropertyDescriptor desc : BonesOfBeans.getAllPropertyDescriptors(value)
                             .values())
+                    {
                         if (desc.getReadMethod() != null
                                 && desc.getWriteMethod() != null)
                         {
@@ -1151,6 +1296,8 @@ public class Structs
                                               desc.getPropertyType());
                             m.put(desc.getName(), x);
                         }
+                    }
+                }
                 L.add(m);
                 return L;
             }
@@ -1164,11 +1311,13 @@ public class Structs
 
     private static class PerformativeMapper implements StructsMapper
     {
+        @Override
         public Object getObject(Object struct)
         {
             return Performative.toConstant(struct.toString());
         }
 
+        @Override
         public Object getStruct(Object value)
         {
             return value.toString();

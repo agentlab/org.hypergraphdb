@@ -13,7 +13,7 @@ import static org.hypergraphdb.peer.Performative.*;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.HGPersistentHandle;
 import org.hypergraphdb.peer.HGPeerIdentity;

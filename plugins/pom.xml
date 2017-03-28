@@ -16,6 +16,9 @@
 		<module>org.hypergraphdb.core</module>
 		<module>org.hypergraphdb.p2p</module>
 		<module>org.hypergraphdb.storage.hgbdbje</module>
+		<module>org.hypergraphdb.app.management</module>
+		<module>org.hypergraphdb.prolog</module>
+		<module>org.hypergraphdb.mjson</module>
 	</modules>
 	
 	<build>

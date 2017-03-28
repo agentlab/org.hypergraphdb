@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.peer.HyperGraphPeer;
 import org.hypergraphdb.peer.MessageHandler;

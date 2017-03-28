@@ -3,7 +3,7 @@ package org.hypergraphdb.peer.cact;
 
 import static org.hypergraphdb.peer.Messages.CONTENT;
 import java.util.UUID;
-import mjson.Json;
+import org.mjson.Json;
 import org.hypergraphdb.HGQuery.hg;
 import org.hypergraphdb.HyperGraph;
 import org.hypergraphdb.peer.HGPeerIdentity;

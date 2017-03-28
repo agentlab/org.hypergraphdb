@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Export-Package: org.hypergraphdb.mjson,
+ org.hypergraphdb.mjson.querying,
+ org.mjson
+Bundle-Version: 1.4.0.qualifier
+Bundle-Name: HyperGraphDB MJSON Persistence
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.hypergraphdb.mjson;singleton:=true
+Import-Package: org.hypergraphdb,
+ org.hypergraphdb.handle,
+ org.hypergraphdb.indexing,
+ org.hypergraphdb.query,
+ org.hypergraphdb.query.impl,
+ org.hypergraphdb.storage,
+ org.hypergraphdb.transaction,
+ org.hypergraphdb.type,
+ org.hypergraphdb.type.javaprimitive,
+ org.hypergraphdb.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: AgentLab

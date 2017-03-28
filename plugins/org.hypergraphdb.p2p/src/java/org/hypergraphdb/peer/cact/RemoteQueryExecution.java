@@ -6,7 +6,7 @@ import static org.hypergraphdb.peer.Messages.getReply;
 import static org.hypergraphdb.peer.Messages.getSender;
 import java.util.UUID;
 import java.util.concurrent.Future;
-import mjson.Json;
+import org.mjson.Json;
 import org.hypergraphdb.HGException;
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGSearchResult;

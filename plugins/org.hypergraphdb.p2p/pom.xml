@@ -23,11 +23,6 @@
 			<artifactId>smackx</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.sharegov</groupId>
-			<artifactId>mjson</artifactId>
-			<version>1.4-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>

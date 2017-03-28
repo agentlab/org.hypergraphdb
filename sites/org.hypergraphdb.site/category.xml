@@ -5,4 +5,10 @@
    </description>
    <feature url="features/org.hypergraphdb.feature_1.4.0.qualifier.jar" id="org.hypergraphdb.feature" version="1.4.0.qualifier"/>
    <feature url="features/org.hypergraphdb.feature.source_1.4.0.qualifier.jar" id="org.hypergraphdb.feature.source" version="1.4.0.qualifier"/>
+   
+   <feature url="features/org.hypergraphdb.app.management.feature_1.4.0.qualifier.jar" id="org.hypergraphdb.app.management.feature" version="1.4.0.qualifier"/>
+   <feature url="features/org.hypergraphdb.app.management.feature.source_1.4.0.qualifier.jar" id="org.hypergraphdb.app.management.feature.source" version="1.4.0.qualifier"/>
+   
+   <feature url="features/org.hypergraphdb.prolog.feature_1.4.0.qualifier.jar" id="org.hypergraphdb.prolog.feature" version="1.4.0.qualifier"/>
+   <feature url="features/org.hypergraphdb.prolog.feature.source_1.4.0.qualifier.jar" id="org.hypergraphdb.prolog.feature.source" version="1.4.0.qualifier"/>
 </site>

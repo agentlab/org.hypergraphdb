@@ -1,6 +1,4 @@
 # Dirs With Binaries #
-bin
-lib
 target
 xtend-gen
 src-gen

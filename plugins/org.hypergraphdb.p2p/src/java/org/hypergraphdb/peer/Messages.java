@@ -1,17 +1,18 @@
-/* 
- * This file is part of the HyperGraphDB source distribution. This is copyrighted 
- * software. For permitted uses, licensing options and redistribution, please see  
- * the LicensingInformation file at the root level of the distribution.  
- * 
- * Copyright (c) 2005-2010 Kobrix Software, Inc.  All rights reserved. 
+/*
+ * This file is part of the HyperGraphDB source distribution. This is copyrighted
+ * software. For permitted uses, licensing options and redistribution, please see
+ * the LicensingInformation file at the root level of the distribution.
+ *
+ * Copyright (c) 2005-2010 Kobrix Software, Inc.  All rights reserved.
  */
 package org.hypergraphdb.peer;
-import static mjson.Json.*;
+import static org.mjson.Json.object;
+
 import java.util.UUID;
-import mjson.Json;
 
 import org.hypergraphdb.peer.serializer.HGPeerJsonFactory;
 import org.hypergraphdb.peer.workflow.Activity;
+import org.mjson.Json;
 
 
 /**
@@ -30,16 +31,15 @@ public class Messages
 	{
 		return HGPeerJsonFactory.getInstance().value(j.at(CONTENT));
 	}
-	
+
     public static Json createMessage(Performative performative, Activity activity)
     {
         return createMessage(performative, activity.getType(), activity.getId());
     }
-    
+
 	public static Json createMessage(Performative performative, String type, UUID activityId)
 	{
-		return object(PERFORMATIVE, performative.toString(), 
-		              ACTIVITY_TYPE, type, 
+        return object(PERFORMATIVE, performative.toString(), ACTIVITY_TYPE, type,
 		              CONVERSATION_ID, activityId);
 	}
 
@@ -47,33 +47,39 @@ public class Messages
     {
         return getReply(msg, performative).set(CONTENT, content);
     }
-	
+
 	public static Json getReply(Json msg, Performative performative)
 	{
 	    return getReply(msg).set(PERFORMATIVE, performative.toString());
 	}
-	
+
 	public static Json makeReply(Activity activity, Performative performative, String replyWith)
 	{
 		Json s = object(ACTIVITY_TYPE, activity.getType(),
                         CONVERSATION_ID, activity.getId(),
-                        PERFORMATIVE, performative.toString());        
+            PERFORMATIVE, performative.toString());
         if (replyWith != null)
+        {
             return s.set(IN_REPLY_TO, replyWith);
+        }
         else
-            return s;	    
+        {
+            return s;
+        }
 	}
-	
+
 	public static Json getReply(Json msg)
 	{
 		Json s = object(ACTIVITY_TYPE, msg.at(ACTIVITY_TYPE),
 		                CONVERSATION_ID, msg.at(CONVERSATION_ID));
 		if (msg.has(PARENT_SCOPE))
-			s.set(PARENT_SCOPE, msg.at(PARENT_SCOPE))
+        {
+            s.set(PARENT_SCOPE, msg.at(PARENT_SCOPE))
 		     .set(PARENT_TYPE, msg.at(PARENT_TYPE));
+        }
 		return msg.has(REPLY_WITH) ? s.set(IN_REPLY_TO, msg.at(REPLY_WITH)) : s;
 	}
-	
+
 	/**
 	 * <p>
 	 * Return the network identity of the sender of a given message.
@@ -83,7 +89,7 @@ public class Messages
 	 */
 	public static Object getSender(Json msg)
 	{
-	    return Messages.fromJson(msg.at(Messages.REPLY_TO));	  
+        return Messages.fromJson(msg.at(Messages.REPLY_TO));
 	}
 
     public static final String PERFORMATIVE = "performative";

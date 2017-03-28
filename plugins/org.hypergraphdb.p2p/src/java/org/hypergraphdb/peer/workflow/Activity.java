@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.hypergraphdb.peer.Messages.*;
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.peer.HGPeerIdentity;
 import org.hypergraphdb.peer.HyperGraphPeer;

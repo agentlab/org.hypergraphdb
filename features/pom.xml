@@ -14,6 +14,8 @@
 	
 	<modules>
 		<module>org.hypergraphdb.feature</module>
+		<module>org.hypergraphdb.app.management.feature</module>
+		<module>org.hypergraphdb.prolog.feature</module>
 	</modules>
 
 	<build>
@@ -21,7 +23,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-source-feature-plugin</artifactId>
-				<executions>
+<!--				<executions>
 					<execution>
 						<phase>package</phase>
 						<id>source-feature</id>
@@ -36,7 +38,7 @@
 							</excludes>
 						</configuration>
 					</execution>
-				</executions>
+				</executions>-->
 			</plugin>
 		</plugins>
 	</build>

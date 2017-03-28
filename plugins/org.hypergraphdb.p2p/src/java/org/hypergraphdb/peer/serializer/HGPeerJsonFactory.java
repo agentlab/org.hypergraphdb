@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.HGException;
 import org.hypergraphdb.HGHandle;

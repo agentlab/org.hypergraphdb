@@ -10,7 +10,7 @@ package org.hypergraphdb.peer.replication;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.peer.HGPeerIdentity;
 import org.hypergraphdb.peer.HyperGraphPeer;

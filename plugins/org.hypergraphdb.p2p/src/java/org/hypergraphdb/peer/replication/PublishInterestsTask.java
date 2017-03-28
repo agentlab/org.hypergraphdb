@@ -8,7 +8,7 @@
 package org.hypergraphdb.peer.replication;
 
 import java.util.UUID;
-import mjson.Json;
+import org.mjson.Json;
 import org.hypergraphdb.peer.HGPeerIdentity;
 import org.hypergraphdb.peer.HyperGraphPeer;
 import org.hypergraphdb.peer.Messages;

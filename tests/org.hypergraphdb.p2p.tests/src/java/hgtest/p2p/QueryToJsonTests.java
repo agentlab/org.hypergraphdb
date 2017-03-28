@@ -1,7 +1,7 @@
 package hgtest.p2p;
 
 import hgtest.HGTestBase;
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGQuery.hg;

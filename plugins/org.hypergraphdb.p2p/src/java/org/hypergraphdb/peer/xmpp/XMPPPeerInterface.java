@@ -15,7 +15,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.concurrent.Future;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.peer.HGPeerIdentity;
 import org.hypergraphdb.peer.HyperGraphPeer;

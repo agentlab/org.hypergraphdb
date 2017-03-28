@@ -7,7 +7,7 @@
  */
 package org.hypergraphdb.peer;
 
-import mjson.Json;
+import org.mjson.Json;
 
 public interface MessageHandler
 {

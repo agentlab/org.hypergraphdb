@@ -11,7 +11,7 @@ import java.util.UUID;
 
 
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.peer.ExceptionAtPeer;
 import org.hypergraphdb.peer.HGPeerIdentity;

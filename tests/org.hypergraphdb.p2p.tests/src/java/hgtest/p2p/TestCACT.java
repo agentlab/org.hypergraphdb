@@ -13,7 +13,7 @@ import hgtest.beans.SimpleBean;
 import hgtest.T;
 import hgtest.beans.ComplexBean;
 import hgtest.beans.PlainBean;
-import mjson.Json;
+import org.mjson.Json;
 import org.hypergraphdb.HGEnvironment;
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGQuery.hg;

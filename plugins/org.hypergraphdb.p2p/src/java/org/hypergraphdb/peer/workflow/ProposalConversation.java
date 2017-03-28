@@ -8,7 +8,7 @@
 package org.hypergraphdb.peer.workflow;
 
 
-import mjson.Json;
+import org.mjson.Json;
 import org.hypergraphdb.peer.Messages;
 import org.hypergraphdb.peer.Performative;
 

@@ -11,7 +11,7 @@ package org.hypergraphdb.peer.workflow;
 import java.lang.reflect.Constructor;
 import java.util.UUID;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.peer.HyperGraphPeer;
 

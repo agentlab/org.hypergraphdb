@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import mjson.Json;
+import org.mjson.Json;
 
 /**
  * <p>

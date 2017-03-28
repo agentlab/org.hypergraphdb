@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import mjson.Json;
+import org.mjson.Json;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HyperGraph;
