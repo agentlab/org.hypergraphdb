@@ -4,13 +4,17 @@
 package org.hypergraphdb.examples;
 
 import org.hypergraphdb.HGHandle;
+import org.hypergraphdb.HGQuery.hg;
 import org.hypergraphdb.HyperGraph;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author amivanoff
- *
+ * <p>
+ * Example OSGi DS component implementation class
+ * <p>
+ * For HGDB Getting Started see {@link <a href="https://github.com/hypergraphdb/hypergraphdb/wiki/GettingStarted">GettingStarted Wiki</a>}
  */
 @Component
 public class TestComponentImpl {
@@ -25,6 +29,7 @@ public class TestComponentImpl {
 
 			String x = "Hello World"; //$NON-NLS-1$
 			stringHandle = graph.add(x);
+			graph.add("Hello World 2"); //$NON-NLS-1$
 
 			Book myBook = new Book("Critique of Pure Reason", "E. Kant"); //$NON-NLS-1$ //$NON-NLS-2$
 			bookHandle = graph.add(myBook);
@@ -48,8 +53,11 @@ public class TestComponentImpl {
 		// without try-with-resources
 		HyperGraph graph = new HyperGraph(dbLocation);
 		try {
-			String x = "Hello World 2"; //$NON-NLS-1$
-			HGHandle stringHandle = graph.add(x);
+			System.out.println("Query");
+			// Querying is done conveniently by using the static helper class "hg"
+			for (Object s : hg.getAll(graph, hg.type(String.class))) {
+				System.out.println(s);
+			}
 		}
 		finally {
 			graph.close();
