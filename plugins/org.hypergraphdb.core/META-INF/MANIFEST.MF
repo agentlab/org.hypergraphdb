@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.hypergraphdb.core;singleton:=true
 Bundle-Version: 1.4.0.qualifier
 Bundle-ManifestVersion: 2
 Import-Package: javax.management
+DynamicImport-Package: *
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.hypergraphdb,
  org.hypergraphdb.algorithms,

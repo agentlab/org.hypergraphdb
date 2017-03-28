@@ -15,7 +15,7 @@ public class PrologHGDBApp extends HGApplication
 	private void undefineTypes(HyperGraph graph)
 	{
 		TypeUtils.deleteInstances(graph, AtomTermType.HANDLE);
-		graph.remove(AtomTermType.HANDLE);				
+		graph.remove(AtomTermType.HANDLE);
 		TypeUtils.deleteInstances(graph, PrologLongType.HANDLE);
 		graph.remove(PrologLongType.HANDLE);
 		TypeUtils.deleteInstances(graph, PrologIntType.HANDLE);
@@ -27,9 +27,9 @@ public class PrologHGDBApp extends HGApplication
 		TypeUtils.deleteInstances(graph, VarType.HANDLE);
 		graph.remove(VarType.HANDLE);
 		TypeUtils.deleteInstances(graph, StructType.HANDLE);
-		graph.remove(StructType.HANDLE);		
+		graph.remove(StructType.HANDLE);
 	}
-	
+
 	private void defineTypes(HyperGraph graph)
 	{
 		HGAtomType t = new StructType();
@@ -49,12 +49,12 @@ public class PrologHGDBApp extends HGApplication
 		graph.getTypeSystem().addPredefinedType(PrologFloatType.HANDLE, t, alice.tuprolog.Float.class);
 		t = new PrologDoubleType();
 		t.setHyperGraph(graph);
-		graph.getTypeSystem().addPredefinedType(PrologDoubleType.HANDLE, t, alice.tuprolog.Double.class);	
+		graph.getTypeSystem().addPredefinedType(PrologDoubleType.HANDLE, t, alice.tuprolog.Double.class);
 		t = new AtomTermType();
 		t.setHyperGraph(graph);
-		graph.getTypeSystem().addPredefinedType(AtomTermType.HANDLE, t, alice.tuprolog.clausestore.HGAtomTerm.class);			
+		graph.getTypeSystem().addPredefinedType(AtomTermType.HANDLE, t, alice.tuprolog.clausestore.HGAtomTerm.class);
 	}
-	
+
 	private void registerIndices(HyperGraph graph)
 	{
 		HGHandle structType = graph.getTypeSystem().getTypeHandle(Struct.class);
@@ -68,7 +68,7 @@ public class PrologHGDBApp extends HGApplication
 		graph.getIndexManager().unregister(new ByPartIndexer(structType, "name"));
 		graph.getIndexManager().unregister(new ByPartIndexer(structType, "predicateIndicator"));
 	}
-	
+
 	public void install(HyperGraph graph)
 	{
 		defineTypes(graph);
@@ -81,7 +81,7 @@ public class PrologHGDBApp extends HGApplication
 		install(graph);
 	}
 
-	public void uninstall(HyperGraph graph)	
+	public void uninstall(HyperGraph graph)
 	{
 		unregisterIndices(graph);
 		undefineTypes(graph);
@@ -91,11 +91,11 @@ public class PrologHGDBApp extends HGApplication
 	{
 		// TODO Auto-generated method stub
 	}
-	
+
 	public void extrADummyMethod() {
 	    System.out.println("blabla");
 	}
-	
+
 	public PrologHGDBApp()
 	{
 		setName("tuPrologApp");
