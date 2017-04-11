@@ -5,9 +5,14 @@ Bundle-SymbolicName: org.hypergraphdb.examples
 Bundle-Version: 1.4.0.qualifier
 Bundle-Vendor: AgentLab
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: org.osgi.service.component.annotations
-Service-Component: OSGI-INF/org.hypergraphdb.examples.TestComponentImpl.xml
+Import-Package: alice.tuprolog,
+ alice.tuprolog.clausestore,
+ alice.tuprolog.hgdb,
+ org.osgi.service.component.annotations
+Service-Component: OSGI-INF/org.hypergraphdb.examples.TestComponentImpl.xml,
+ OSGI-INF/org.hypergraphdb.prolog.examples.TestPrologComponentImpl.xml
 Bundle-ActivationPolicy: lazy
-Export-Package: org.hypergraphdb.examples
+Export-Package: org.hypergraphdb.examples,
+ org.hypergraphdb.prolog.examples
 Require-Bundle: org.hypergraphdb.core;bundle-version="1.4.0",
  org.hypergraphdb.storage.hgbdbje;bundle-version="1.4.0"
